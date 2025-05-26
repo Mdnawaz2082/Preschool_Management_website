@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscribers -  Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: #fffaf0;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .navbar {
+            background-color: #ffe6e6;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 2rem;
+            flex-wrap: wrap;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .navbar-brand span {
+            color: #e75480;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar img {
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .navbar-nav {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #e75480;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-dismissible {
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .btn-close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #000;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        footer {
+            background-color: #ffe6e6;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Admin Navbar -->
+<nav class="navbar">
+    <a class="navbar-brand" href="/admin/dashboard">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Cocoon Logo">
+        <span>Cocoon Admin</span>
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/admin/programs">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/events">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/admissions">Admissions</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/contact">Messages</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Content -->
+<div class="container">
+    <h2>Newsletter Subscribers</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible">
+                    {{ message }}
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none';">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if subscribers %}
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sub in subscribers %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ sub.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">No subscribers yet.</p>
+    {% endif %}
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Cocoon Preschool. All rights reserved.
+</footer>
+
+</body>
+</html>

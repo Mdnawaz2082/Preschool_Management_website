@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | Cocoon Preschool</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="icon" href="/static/images/logo.png" type="image/png">
+
+  <style>
+    body {
+      background: #fffaf0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Baloo 2', cursive;
+    }
+
+    .navbar {
+            background-color: #ffe6e6;
+        }
+
+        .navbar-brand span {
+            color: #e75480;
+        }
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            color: #e75480;
+        }
+
+    
+
+    .contact-section {
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svg-divider-top {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .contact-info, .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-info:hover, .contact-form:hover {
+      transform: translateY(-5px);
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-item i {
+      color: #ff6f61;
+      font-size: 26px;
+      margin-right: 12px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .form-control:focus {
+      border-color: #ff6f61;
+      box-shadow: 0 0 5px rgba(255,111,97,0.5);
+    }
+
+    .btn-primary {
+      background-color: #ff6f61;
+      border: none;
+      padding: 10px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #e85b50;
+    }
+
+    .map-container {
+      height: 300px;
+      margin-top: 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background-color: #ffe4e1;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/static/images/logo.png" alt="Cocoon Logo" style="height: 50px; margin-right: 10px; border-radius: 50%">
+        <span style="font-size: 1.5rem; font-weight: bold;">Cocoon</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="/programs">Programs</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admissions">Admissions</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <section class="contact-section">
+    <!-- SVG Divider -->
+    <div class="svg-divider-top">
+      <svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffe4e1" d="M0,96L40,106.7C80,117,160,139,240,144C320,149,400,139,480,117.3C560,96,640,64,720,74.7C800,85,880,139,960,154.7C1040,171,1120,149,1200,128C1280,107,1360,85,1400,74.7L1440,64L1440,0L0,0Z"/>
+      </svg>
+    </div>
+
+    <div class="container">
+      <h1 class="text-center mb-5" data-aos="fade-up">Contact Us</h1>
+      <div class="row">
+        <div class="col-md-5" data-aos="fade-right">
+          <div class="contact-info">
+            <h3>Get in Touch <i class="fas fa-heart text-danger"></i></h3>
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>abc colony xyc road city state 000000</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 9876543210</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <span>abc@gmail.com</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <span>Monday - Friday: 9:30 AM - 1:30 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7" data-aos="fade-left">
+          <div class="contact-form">
+            <div class="text-center mb-3">
+              <img src="/static/images/mail.png" alt="Cute Mailbox" style="height: 70px;">
+            </div>
+            <h3 class="text-center">Send us a Message</h3>
+            <form id="contactForm" method="POST" action="/contact">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" required />
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-container mt-5" data-aos="fade-up">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3887.5707572678825!2d77.47641967507695!3d12.999283587318603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU5JzU3LjQiTiA3N8KwMjgnNDQuNCJF!5e0!3m2!1sen!2sin!4v1746107778306!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Cocoon The Preschool. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

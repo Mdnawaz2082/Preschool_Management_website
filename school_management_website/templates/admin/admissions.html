@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Admissions | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fffaf3;
+        }
+
+        .navbar {
+            background-color: #ffe6e6;
+        }
+
+        .navbar-brand span {
+            color: #e75480;
+        }
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            color: #e75480;
+        }
+
+
+        h2 {
+            color: #333;
+        }
+
+        .btn-group .btn {
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .btn-group .btn.active {
+            background-color: #f3cfde;
+            color: white;
+        }
+
+        .table th {
+            background-color: #ffe0e0;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #fff3f3;
+        }
+
+        .status-pending {
+            background-color: #fff3cd !important;
+        }
+
+        .status-approved {
+            background-color: #d4edda !important;
+        }
+
+        .status-rejected {
+            background-color: #f8d7da !important;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+        }
+
+        .modal-header {
+            background-color: #ffebee;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        .btn-info, .btn-success, .btn-danger {
+            border-radius: 10px;
+        }
+
+        .btn-info i, .btn-success i, .btn-danger i {
+            margin-right: 4px;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg shadow">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="/admin">Cocoon Admin</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/admin/programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/admin/admissions">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/contact">Messages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Admission Applications</h2>
+            <div class="btn-group">
+                <button class="btn btn-outline-primary active" onclick="filterStatus('all')">All</button>
+                <button class="btn btn-outline-warning" onclick="filterStatus('pending')">Pending</button>
+                <button class="btn btn-outline-success" onclick="filterStatus('approved')">Approved</button>
+                <button class="btn btn-outline-danger" onclick="filterStatus('rejected')">Rejected</button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive shadow rounded bg-white p-3">
+            <table class="table table-hover text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Child's Name</th>
+                        <th>Parent</th>
+                        <th>Program</th>
+                        <th>Age</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for admission in admissions %}
+                    <tr class="status-{{ admission.status.lower() }}">
+                        <td>{{ admission.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ admission.child_name }}</td>
+                        <td>{{ admission.parent_name }}</td>
+                        <td>{{ admission.program }}</td>
+                        <td>{{ admission.age }}</td>
+                        <td><strong>{{ admission.status }}</strong></td>
+                        <td>
+                            <button class="btn btn-sm btn-info" onclick="viewDetails('{{ admission.id }}')">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="updateStatus('{{ admission.id }}', 'approved')">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="updateStatus('{{ admission.id }}', 'rejected')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Application Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="applicationDetails"></div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function viewDetails(id) {
+            fetch(`/admin/admissions/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    const details = document.getElementById('applicationDetails');
+                    details.innerHTML = `
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Child's Name:</strong> ${data.child_name}</p>
+                                <p><strong>Date of Birth:</strong> ${data.dob}</p>
+                                <p><strong>Age:</strong> ${data.age}</p>
+                                <p><strong>Program:</strong> ${data.program}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Parent's Name:</strong> ${data.parent_name}</p>
+                                <p><strong>Email:</strong> ${data.email}</p>
+                                <p><strong>Phone:</strong> ${data.phone}</p>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p><strong>Address:</strong></p>
+                            <p>${data.address}</p>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-danger" onclick="deleteAdmission(${data.id})">
+                                <i class="fas fa-trash"></i> Delete Admission
+                            </button>
+                        </div>
+                    `;
+                    new bootstrap.Modal(document.getElementById('detailsModal')).show();
+                });
+        }
+
+        function updateStatus(id, status) {
+            if (confirm(`Are you sure you want to mark this application as ${status}?`)) {
+                fetch(`/admin/admissions/${id}/status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: status })
+                }).then(response => {
+                    if (response.ok) location.reload();
+                });
+            }
+        }
+
+        function deleteAdmission(id) {
+            if (confirm("Are you sure you want to delete this admission?")) {
+                fetch(`/admin/admissions/delete/${id}`, {
+                    method: 'DELETE',
+                }).then(response => {
+                    if (response.ok) location.reload();
+                    else alert("Failed to delete admission.");
+                }).catch(error => {
+                    console.error("Error:", error);
+                });
+            }
+        }
+
+        function filterStatus(status) {
+            window.location.href = `/admin/admissions?status=${status}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | My Preschool</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <link rel="icon" href="/static/images/logo.png" type="image/png">
+    <style>
+        body {
+            background: #fffaf0;
+            font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Baloo 2', cursive;
+        }
+
+        .navbar {
+            background-color: #ffe6e6;
+        }
+
+        .navbar-brand span {
+            color: #e75480;
+        }
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            color: #e75480;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/hero.jpg') no-repeat center center;
+            background-size: cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-section {
+            background: #ffe4e1;
+            padding: 60px 0;
+        }
+
+        .program-section, .facilities-section {
+            padding: 60px 0;
+        }
+        
+        .cta-section {
+            background-color: #ffcccb;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* span{
+            background-color: #ffe4e1;
+            text-align: center;
+            padding: 20px 0;
+        } */
+
+        /* Dark Mode Styling */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .navbar,
+        body.dark-mode footer,
+        body.dark-mode .testimonial-section,
+        body.dark-mode .cta-section {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .feature-card {
+            background-color: #2a2a2a;
+            color: #fff;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .navbar .nav-link {
+            color: #ccc;
+        }
+
+        body.dark-mode .navbar .nav-link:hover {
+            color: #fff;
+        }
+
+    /* Floating SVGs / Background shapes */
+    .floating-icon {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.08;
+      animation: float 10s infinite;
+    }
+
+    .icon-star {
+      top: 10%;
+      left: 5%;
+      width: 80px;
+      opacity: 70%;
+    }
+
+    .icon-cloud {
+      bottom: 10%;
+      right: 10%;
+      width: 100px;
+      opacity: 70%;
+    }
+
+    .icon-bubble {
+      top: 40%;
+      right: 5%;
+      width: 60px;
+      opacity: 70%;
+    }
+    .icon-flower {
+      bottom: 20%;
+      left: 5%;
+      width: 80px;
+      opacity: 70%;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+    }
+    footer {
+  background: #f8f9fa;
+  color: #343a40;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  font-family: 'Poppins', sans-serif;
+}
+
+footer h5 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffcccb;
+}
+
+footer p, footer a {
+  color: #343a40;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ffcccb;
+  text-decoration: underline;
+}
+
+footer .input-group input[type="email"] {
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem 0 0 0.375rem;
+  padding: 10px;
+}
+
+footer .input-group button {
+  border-radius: 0 0.375rem 0.375rem 0;
+  background-color: #ffcccb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+}
+
+footer .input-group button:hover {
+  background-color: #ffffff;
+  color: black;
+    border: 1px solid #ffcccb;
+}
+
+footer .text-center.p-3 {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  footer .col-md-3,
+  footer .col-md-2,
+  footer .col-md-4,
+  footer .col-md-3 {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  footer .input-group {
+    flex-direction: column;
+  }
+
+  footer .input-group input[type="email"],
+  footer .input-group button {
+    width: 100%;
+    border-radius: 0.375rem !important;
+    margin-bottom: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+  <!-- Decorative Icons -->
+  <img src="/static/images/cloud.png" class="floating-icon icon-cloud" alt="Cloud" />
+  <img src="/static/images/bird.png" class="floating-icon icon-bubble" alt="Bubble" />
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/static/images/logo.png" alt="Cocoon Logo" style="height: 50px; margin-right: 10px; border-radius: 50%">
+                <span style="font-size: 1.5rem; font-weight: bold;">Cocoon</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admissions">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin">Login</a></li>
+                    <!-- Dark Mode Toggle -->
+                    <li class="nav-item">
+                        <!-- <button id="toggle-dark" class="btn btn-sm btn-outline-dark ms-3">Toggle Dark Mode</button> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4" data-aos="fade-up">Welcome to Cocoon Preschool</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Where Learning Begins with Love and Care</p>
+            <a href="/admissions" class="btn btn-primary btn-lg mt-3" data-aos="fade-up" data-aos-delay="200" style="background-color: transparent; border-color: white;">Enroll Now</a>
+        </div>
+    </section>
+    <!-- Why Choose Us -->
+    <section class="container py-5">
+  <img src="/static/images/star.png" class="floating-icon icon-star" alt="Star" />
+  <img src="/static/images/flower.png" class="floating-icon icon-flower" alt="Star" />
+        <h2 class="text-center mb-5" data-aos="fade-up">Why Choose Cocoon?</h2>
+        <div class="row">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="feature-card text-center">
+                    <i class="fas fa-chalkboard-teacher fa-3x mb-3" style="color: #ffcccb;"></i>
+                    <h3>Expert Teachers</h3>
+                    <p>Our experienced educators are passionate about early childhood development.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card text-center">
+                    <i class="fas fa-puzzle-piece fa-3x mb-3" style="color: #ffcccb;"></i>
+                    <h3>Learning Through Play</h3>
+                    <p>We believe in making learning fun and engaging for every child.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card text-center">
+                    <i class="fas fa-heart fa-3x mb-3" style="color: #ffcccb;"></i>
+                    <h3>Safe Environment</h3>
+                    <p>Your child's safety and well-being are our top priorities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Overview -->
+    <section class="program-section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up" >Our Programs</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-right">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-paint-brush fa-3x mb-3" style="color: #ffcccb;"></i>
+                        <h4>Creative Arts</h4>
+                        <p>Develop imagination and creativity through painting, music, and crafts.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-dumbbell fa-3x mb-3" style="color: #ffcccb;"></i>
+                        <h4>Physical Education</h4>
+                        <p>Build strength and coordination with playful physical activities and games.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-left">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-book-open fa-3x mb-3" style="color: #ffcccb;"></i>
+                        <h4>Early Learning</h4>
+                        <p>Introduce foundational skills in literacy, math, and science through fun exploration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Overview -->
+    <section class="facilities-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Our Facilities</h2>
+            <div class="row text-center">
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+                    <i class="fas fa-paint-brush fa-3x mb-3 " style="color: #ffcccb;" ></i>
+                    <h5 class="mb-2">Creative Art Zone</h5>
+                    <p class="text-muted">A space for little artists to express themselves with art and crafts.</p>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-book-reader fa-3x mb-3" style="color:#ffcccb;"></i>
+                    <h5 class="mb-2">Fun Learning Environment</h5>
+                    <p class="text-muted">Playful and engaging atmosphere where learning is fun every day.</p>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-shield-alt fa-3x mb-3" style="color: #ffcccb;"></i>
+                    <h5>Safe & Secure</h5>
+                    <p class="text-muted">Fully secured campus with trained staff and monitored access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">What Parents Say</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="feature-card">
+                        <p>"Education given in this school is best .. kids ll have the best time and get best education .. teachers here are good .. activities and games done here very interesting...
+                            This is the school to be choose for your kids without any second thought ✨✨✨✨👌"</p>
+                    </br>
+                    <center><span class="blockquote-footer">smriti</span></center>        
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <p>"Dear Teachers,
+                            I would like to thank you all for the wonderful time my son Akshobhya had at Summer Camp. He enjoyed the exciting activities very much, met new friends. Everything went perfectly. It is a safe and extremely well-organized place; the staff are supportive and caring. We felt always very relaxed!”"</p>
+                    <center><span class="blockquote-footer">akshata</span></center>        
+
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <p>"Happy with the way of teaching at this school, as my child has improved with his speaking skills, general good habits and other etiquettes. Really happy with Teachers and staff. Thank you Cocoon.."</p>
+                    </br>
+                </br>
+                    <center><span class="blockquote-footer">ganesh m</span></center>        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Ready to Join the preschool Family?</h2>
+            <p>We can't wait to welcome you and your child into our nurturing environment.</p>
+            <a href="/contact" class="btn btn-light mt-3">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark pt-5 pb-4">
+        <div class="container  text-md-left">
+          <div class="row  text-md-left">
+      
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold ">My Preschool</h5>
+              <p>Creating a nurturing space for every child to learn, play, and grow confidently.</p>
+            </div>
+      
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold ">Links</h5>
+              <p><a href="/" class="text-dark" style="text-decoration:none;">Home</a></p>
+              <p><a href="/about" class="text-dark" style="text-decoration:none;">About</a></p>
+              <p><a href="/admissions" class="text-dark" style="text-decoration:none;">Admissions</a></p>
+              <p><a href="/contact" class="text-dark" style="text-decoration:none;">Contact</a></p>
+            </div>
+      
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
+              <p><i class="fas fa-home mr-3"></i> ABC XYZ cross city state 000000</p>
+              <p><i class="fas fa-envelope mr-3"></i> abc@gmail.com</p>
+              <p><i class="fas fa-phone mr-3"></i> +91 9876543210</p>
+            </div>
+      
+            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
+              <h5 class="text-uppercase mb-4 font-weight-bold ">Newsletter</h5>
+              <form action="/subscribe" method="POST">
+                <div class="input-group">
+                  <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                  <button class="btn btn-primary" type="submit">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      
+        <div class="text-center p-3 mt-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2025 My Preschool | Designed with ❤️ by Nawaz Mulla 
+        </div>
+      </footer>      
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script>
+        const toggleBtn = document.getElementById('toggle-dark');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

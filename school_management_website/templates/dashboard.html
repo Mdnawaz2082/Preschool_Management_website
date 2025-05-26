@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Cocoon Preschool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #fffaf0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Baloo 2', cursive;
+        }
+        .navbar {
+            background-color: #ffe6e6;
+        }
+
+        .navbar-brand span {
+            color: #e75480;
+        }
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            color: #e75480;
+        }
+
+        .about-section {
+            padding: 80px 0;
+        }
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .mission-vision {
+            background-color: #fff5ee;
+            padding: 60px 0;
+        }
+        .values-section {
+            padding: 60px 0;
+        }
+        .value-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #ffe4e1;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <!-- Flex container for logo and brand name -->
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/static/images/logo.png" alt="Cocoon Logo" style="height: 50px; margin-right: 10px; border-radius: 50%">
+                <span style="font-size: 1.5rem; font-weight: bold;">Cocoon</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admissions">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li> -->
+                    <li class="nav-item" style="border: solid white 2px; border-radius: 5px;"><a class="nav-link" href="/admin/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Programs</h5>
+                        <p class="card-text">Manage school programs</p>
+                        <a href="/admin/programs" class="btn btn-primary">View Programs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Events</h5>
+                        <p class="card-text">Manage upcoming events</p>
+                        <a href="/admin/events" class="btn btn-primary">View Events</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gallery</h5>
+                        <p class="card-text">Manage photo gallery</p>
+                        <a href="/admin/gallery" class="btn btn-primary">View Gallery</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Admissions</h5>
+                        <p class="card-text">View admission applications</p>
+                        <a href="/admin/admissions" class="btn btn-primary">View Applications</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Messages</h5>
+                        <p class="card-text">View contact messages</p>
+                        <a href="/admin/contact" class="btn btn-primary">View Messages</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Subscribers</h5>
+                        <p class="card-text">View Subscribers List</p>
+                        <a href="/admin/subscribers" class="btn btn-primary">View Subscribers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
